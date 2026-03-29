@@ -1,18 +1,40 @@
-<h1>Welcome to Prairie Tech Store Dashboard</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">Dashboard</h1>
 
-<div class="dashboard-cards" style="display: flex; gap: 20px;">
-  <div class="card" style="border:1px solid #ccc; padding:20px; width:200px; text-align:center;">
-    <h2><%= @total_products %></h2>
-    <p>Products</p>
-  </div>
+  <div class="row">
 
-  <div class="card" style="border:1px solid #ccc; padding:20px; width:200px; text-align:center;">
-    <h2><%= @total_categories %></h2>
-    <p>Categories</p>
-  </div>
+    <!-- Products Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3 shadow">
+        <div class="card-body text-center">
+          <h2><%= @total_products %></h2>
+          <p>Products</p>
+          <%= link_to "View Products", "#", class: "btn btn-light btn-sm" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="card" style="border:1px solid #ccc; padding:20px; width:200px; text-align:center;">
-    <h2><%= @total_orders %></h2>
-    <p>Orders</p>
+    <!-- Categories Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3 shadow">
+        <div class="card-body text-center">
+          <h2><%= @total_categories %></h2>
+          <p>Categories</p>
+          <%= link_to "View Categories", "#", class: "btn btn-light btn-sm" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3 shadow">
+        <div class="card-body text-center">
+          <h2><%= @total_orders %></h2>
+          <p>Orders</p>
+          <%= link_to "View Orders", "#", class: "btn btn-light btn-sm" %>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
