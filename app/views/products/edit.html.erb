@@ -1,6 +1,6 @@
 <h1>Edit Product</h1>
 
-<%= form_with model: @product, local: true do |f| %>
+<%= form_with model: @product, local: true, html: { multipart: true } do |f| %>
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -19,6 +19,11 @@
   <p>
     <%= f.label :stock_quantity %><br>
     <%= f.number_field :stock_quantity %>
+  </p>
+
+  <p>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
   </p>
 
   <p>

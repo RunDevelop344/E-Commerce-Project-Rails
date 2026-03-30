@@ -9,7 +9,7 @@
         <div class="card-body text-center">
           <h2><%= @total_products %></h2>
           <p>Products</p>
-          <%= link_to "View Products", "#", class: "btn btn-light btn-sm" %>
+           <%= link_to "View Products", products_path, class: "btn btn-light btn-sm" %>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="card-body text-center">
           <h2><%= @total_categories %></h2>
           <p>Categories</p>
-          <%= link_to "View Categories", "#", class: "btn btn-light btn-sm" %>
+          <%= link_to "View Categories", categories_path, class: "btn btn-light btn-sm" %>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="card-body text-center">
           <h2><%= @total_orders %></h2>
           <p>Orders</p>
-          <%= link_to "View Orders", "#", class: "btn btn-light btn-sm" %>
+          <%= link_to "View Orders", orders_path, class: "btn btn-light btn-sm" %>
         </div>
       </div>
     </div>

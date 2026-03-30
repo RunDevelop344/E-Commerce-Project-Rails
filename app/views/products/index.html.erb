@@ -4,6 +4,12 @@
 
 <% @products.each do |product| %>
   <p>
+
+    <% if product.image.attached? %>
+      <%= image_tag product.image, width: 150 %><br>
+    <% end %>
+
+
     <strong><%= product.name %></strong> - $<%= product.price %>
     <%= link_to "Edit", edit_product_path(product) %> |
     <%= link_to "Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" } %>
