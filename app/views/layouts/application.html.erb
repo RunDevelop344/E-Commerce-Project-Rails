@@ -37,12 +37,16 @@
             <%= link_to "Dashboard", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Products", "#", class: "nav-link" %>
+            <%= link_to "Products", products_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Categories", "#", class: "nav-link" %>
+            <%= link_to "Categories", categories_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Orders", orders_path, class: "nav-link" %>
           </li>
         </ul>
+
 
         <span class="navbar-text me-3">
           Logged in as <%= current_user.email %>

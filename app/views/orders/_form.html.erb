@@ -1,0 +1,29 @@
+<%= form_with(model: order, local: true) do |f| %>
+  <% if order.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(order.errors.count, "error") %> prevented this order from saving:</h4>
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :customer_id %>
+    <%= f.number_field :customer_id, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :status %>
+    <%= f.text_field :status, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :total_price %>
+    <%= f.number_field :total_price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

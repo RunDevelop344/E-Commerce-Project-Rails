@@ -1,0 +1,6 @@
+<h1>Category: <%= @category.name %></h1>
+
+<p><strong>Description:</strong> <%= @category.description %></p>
+
+<%= link_to "Edit", edit_category_path(@category), class: "btn btn-warning" %>
+<%= link_to "Back to Categories", categories_path, class: "btn btn-secondary" %>
