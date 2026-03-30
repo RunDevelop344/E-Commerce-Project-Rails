@@ -26,6 +26,11 @@
     <%= f.file_field :image %>
   </p>
 
+  <p>
+  <%= f.label :category_id, "Category" %><br>
+  <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </p>
+
 
   <p>
     <%= f.submit "Create Product" %>
