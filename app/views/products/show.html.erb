@@ -10,17 +10,25 @@
     </nav>
 
     <div class="card shadow">
+
+      <!-- Product Image -->
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, class: "card-img-top", style: "max-height: 400px; object-fit: cover;" %>
+      <% else %>
+        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+          <span class="text-muted fs-5">No Image Available</span>
+        </div>
+      <% end %>
+
       <div class="card-body p-4">
         <h1 class="card-title fw-bold mb-1"><%= @product.name %></h1>
 
-        <span class="badge bg-secondary mb-3">
-          <%= @product.category.name if @product.respond_to?(:category) && @product.category %>
-        </span>
+        <% if @product.category.present? %>
+          <span class="badge bg-secondary mb-3"><%= @product.category.name %></span>
+        <% end %>
 
         <hr>
-
         <p class="card-text fs-5"><%= @product.description %></p>
-
         <hr>
 
         <div class="row mt-3">

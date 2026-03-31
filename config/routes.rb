@@ -2,16 +2,15 @@ Rails.application.routes.draw do
   # Devise (Authentication)
   devise_for :users
 
+  # Add this line - redirects /admin to /admin/dashboard
+  get '/admin', to: redirect('/admin/dashboard')
+
   # -----------------
   # Public (Customer-facing)
   # -----------------
   root "home#index"
 
-  resources :products, only: [:index, :show] do
-    collection do
-      get :search   # optional if you later want separate search action
-    end
-  end
+  resources :products, only: [:index, :show]
 
   resources :categories, only: [:index, :show]
 
