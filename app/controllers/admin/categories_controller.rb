@@ -1,8 +1,10 @@
-class CategoriesController < ApplicationController
+# app/controllers/admin/categories_controller.rb
+class Admin::CategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order(:name)
   end
 
   def show
@@ -15,7 +17,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to @category, notice: "Category created successfully."
+      redirect_to admin_categories_path, notice: "Category created successfully."
     else
       render :new
     end
@@ -26,7 +28,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to @category, notice: "Category updated successfully."
+      redirect_to admin_categories_path, notice: "Category updated successfully."
     else
       render :edit
     end
@@ -34,7 +36,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_path, notice: "Category deleted successfully."
+    redirect_to admin_categories_path, notice: "Category deleted successfully."
   end
 
   private

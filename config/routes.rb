@@ -1,25 +1,27 @@
 Rails.application.routes.draw do
-  # Devise routes for users
+  # Devise (Authentication)
   devise_for :users
 
   # -----------------
-  # Public user pages
+  # Public (Customer-facing)
   # -----------------
-  namespace :users do
-    root "home#index"          # Users visit /users → homepage
-    get "/", to: "home#index"  # optional, same as above
-    resources :products, only: [:index, :show]  # users can browse products
+  root "home#index"
+
+  resources :products, only: [:index, :show] do
+    collection do
+      get :search   # optional if you later want separate search action
+    end
   end
 
-  # Public homepage
-  root "users/home#index"      # "/" points to users' homepage
+  resources :categories, only: [:index, :show]
 
   # -----------------
-  # Admin pages
+  # Admin (Back-office)
   # -----------------
   namespace :admin do
     get "dashboard", to: "home#index"
     resources :products
+    resources :categories
     resources :orders
   end
 

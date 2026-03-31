@@ -1,5 +1,11 @@
-<h1>Edit Order</h1>
-
-<%= render "form", order: @order %>
-
-<%= link_to "Back to Orders", orders_path, class: "btn btn-secondary mt-2" %>
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card shadow">
+      <div class="card-body p-4">
+        <h1 class="mb-4">Edit Order</h1>
+        <%= render "form", order: @order %>
+        <%= link_to "Back to Orders", admin_orders_path, class: "btn btn-outline-secondary mt-2" %>
+      </div>
+    </div>
+  </div>
+</div>

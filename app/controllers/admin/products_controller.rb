@@ -1,10 +1,13 @@
-class ProductsController < ApplicationController
+# app/controllers/admin/products_controller.rb
+class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-  # ✅ THIS IS MISSING (or not saved properly)
   def index
-    @products = Product.all
+    @products = Product.all.order(created_at: :desc)
+  end
+
+  def show
   end
 
   def new
@@ -14,31 +17,33 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path, notice: "Product created"
+      redirect_to admin_products_path, notice: "Product created successfully."
     else
       render :new
     end
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to products_path, notice: "Updated"
+      redirect_to admin_products_path, notice: "Product updated successfully."
     else
       render :edit
     end
   end
 
   def destroy
-    Product.find(params[:id]).destroy
-    redirect_to products_path, notice: "Deleted"
+    @product.destroy
+    redirect_to admin_products_path, notice: "Product deleted successfully."
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :stock_quantity, :category_id, :image)

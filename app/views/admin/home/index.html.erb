@@ -1,40 +1,31 @@
-<div class="container mt-4">
-  <h1 class="mb-4">Dashboard</h1>
+<h1 class="mb-4">Admin Dashboard</h1>
 
-  <div class="row">
-
-    <!-- Products Card -->
-    <div class="col-md-4">
-      <div class="card text-white bg-primary mb-3 shadow">
-        <div class="card-body text-center">
-          <h2><%= @total_products %></h2>
-          <p>Products</p>
-           <%= link_to "View Products", products_path, class: "btn btn-light btn-sm" %>
-        </div>
+<div class="row g-4 mb-5">
+  <div class="col-md-4">
+    <div class="card text-white bg-dark shadow text-center">
+      <div class="card-body">
+        <h2 class="fw-bold"><%= @total_products %></h2>
+        <p>Products</p>
+        <%= link_to "Manage", admin_products_path, class: "btn btn-outline-light btn-sm" %>
       </div>
     </div>
-
-    <!-- Categories Card -->
-    <div class="col-md-4">
-      <div class="card text-white bg-success mb-3 shadow">
-        <div class="card-body text-center">
-          <h2><%= @total_categories %></h2>
-          <p>Categories</p>
-          <%= link_to "View Categories", categories_path, class: "btn btn-light btn-sm" %>
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-success shadow text-center">
+      <div class="card-body">
+        <h2 class="fw-bold"><%= @total_categories %></h2>
+        <p>Categories</p>
+        <%= link_to "Manage", admin_categories_path, class: "btn btn-outline-light btn-sm" %>
       </div>
     </div>
-
-    <!-- Orders Card -->
-    <div class="col-md-4">
-      <div class="card text-white bg-warning mb-3 shadow">
-        <div class="card-body text-center">
-          <h2><%= @total_orders %></h2>
-          <p>Orders</p>
-          <%= link_to "View Orders", orders_path, class: "btn btn-light btn-sm" %>
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-warning shadow text-center">
+      <div class="card-body">
+        <h2 class="fw-bold"><%= @total_orders %></h2>
+        <p>Orders</p>
+        <%= link_to "Manage", admin_orders_path, class: "btn btn-outline-dark btn-sm" %>
       </div>
     </div>
-
   </div>
 </div>
