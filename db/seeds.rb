@@ -4,8 +4,37 @@ require 'faker'
 require 'open-uri'
 
 puts "Cleaning old data..."
+Order.destroy_all
 Product.destroy_all
 Category.destroy_all
+
+puts "Seeding provinces..."
+Province.destroy_all
+
+provinces_data = [
+  { name: "Alberta",                       gst: 5.0, pst: 0.0,  hst: 0.0  },
+  { name: "British Columbia",              gst: 5.0, pst: 7.0,  hst: 0.0  },
+  { name: "Manitoba",                      gst: 5.0, pst: 7.0,  hst: 0.0  },
+  { name: "New Brunswick",                 gst: 0.0, pst: 0.0,  hst: 15.0 },
+  { name: "Newfoundland and Labrador",     gst: 0.0, pst: 0.0,  hst: 15.0 },
+  { name: "Northwest Territories",         gst: 5.0, pst: 0.0,  hst: 0.0  },
+  { name: "Nova Scotia",                   gst: 0.0, pst: 0.0,  hst: 15.0 },
+  { name: "Nunavut",                       gst: 5.0, pst: 0.0,  hst: 0.0  },
+  { name: "Ontario",                       gst: 0.0, pst: 0.0,  hst: 13.0 },
+  { name: "Prince Edward Island",          gst: 0.0, pst: 0.0,  hst: 15.0 },
+  { name: "Quebec",                        gst: 5.0, pst: 9.975,hst: 0.0  },
+  { name: "Saskatchewan",                  gst: 5.0, pst: 6.0,  hst: 0.0  },
+  { name: "Yukon",                         gst: 5.0, pst: 0.0,  hst: 0.0  }
+]
+
+provinces_data.each do |p|
+  Province.find_or_create_by!(name: p[:name]) do |province|
+    province.gst = p[:gst]
+    province.pst = p[:pst]
+    province.hst = p[:hst]
+  end
+end
+puts "Created #{Province.count} provinces"
 
 # -----------------------------------------------
 # REQUIREMENT 1.8 — API: FakeStoreAPI
@@ -22,8 +51,22 @@ categories = {}
   categories[name] = Category.find_or_create_by!(name: name)
 end
 
-response = HTTParty.get("https://fakestoreapi.com/products")
-api_products = JSON.parse(response.body)
+response = HTTParty.get("https://fakestoreapi.com/products",
+  headers: {
+    "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Accept" => "application/json"
+  },
+  timeout: 30
+)
+
+# Check if response is valid JSON
+unless response.success? && response.headers["content-type"]&.include?("json")
+  puts "FakeStoreAPI unavailable, using hardcoded products instead..."
+  api_products = []
+else
+  api_products = JSON.parse(response.body)
+end
+
 
 api_count = 0
 api_products.each do |item|
