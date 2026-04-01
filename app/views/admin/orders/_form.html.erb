@@ -11,14 +11,26 @@
 
   <div class="mb-3">
     <%= f.label :status, class: "form-label" %>
-    <%= f.select :status, ["pending", "processing", "shipped", "delivered", "cancelled"],
+    <%= f.select :status,
+        [["New Order", "new"], ["Paid", "paid"], ["Shipped", "shipped"]],
         { prompt: "Select status" }, class: "form-select" %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :total_price, class: "form-label" %>
-    <%= f.number_field :total_price, step: 0.01, class: "form-control" %>
+  <div class="card mb-3">
+    <div class="card-header">Order Summary (Read Only)</div>
+    <div class="card-body">
+      <p><strong>Customer:</strong> <%= order.user&.email %></p>
+      <p><strong>Province:</strong> <%= order.province&.name %></p>
+      <p><strong>Subtotal:</strong> <%= number_to_currency(order.subtotal) %></p>
+      <p><strong>GST:</strong> <%= number_to_currency(order.gst_amount) %></p>
+      <p><strong>PST:</strong> <%= number_to_currency(order.pst_amount) %></p>
+      <p><strong>HST:</strong> <%= number_to_currency(order.hst_amount) %></p>
+      <p class="mb-0"><strong>Total:</strong> <%= number_to_currency(order.total) %></p>
+    </div>
   </div>
 
-  <%= f.submit class: "btn btn-dark w-100" %>
+  <div class="d-flex gap-2">
+    <%= f.submit "Update Order", class: "btn btn-dark" %>
+    <%= link_to "Cancel", admin_orders_path, class: "btn btn-outline-secondary" %>
+  </div>
 <% end %>
