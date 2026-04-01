@@ -1,15 +1,82 @@
 <div class="row justify-content-center">
-  <div class="col-md-7">
-    <div class="card shadow">
-      <div class="card-body p-4">
-        <h1 class="mb-3">Order #<%= @order.id %></h1>
-        <hr>
-        <p><strong>User ID:</strong> <%= @order.user_id %></p>
-        <p><strong>Total:</strong> <%= number_to_currency(@order.total) %></p>
-        <hr>
-        <%= link_to "Edit", edit_admin_order_path(@order), class: "btn btn-warning" %>
-        <%= link_to "Back to Orders", admin_orders_path, class: "btn btn-outline-secondary" %>
+  <div class="col-md-8">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Order #<%= @order.id %></h1>
+      <%= link_to "Back to Orders", admin_orders_path, class: "btn btn-outline-secondary" %>
+    </div>
+
+    <div class="card shadow mb-4">
+      <div class="card-header fw-bold">Customer Details</div>
+      <div class="card-body">
+        <p><strong>Email:</strong> <%= @order.user&.email %></p>
+        <p><strong>Name:</strong> <%= [@order.user&.first_name, @order.user&.last_name].join(" ") %></p>
+        <p><strong>Address:</strong> <%= @order.user&.address %>, <%= @order.user&.city %>, <%= @order.user&.postal_code %></p>
+        <p><strong>Province:</strong> <%= @order.province&.name %></p>
+        <p class="mb-0"><strong>Order Date:</strong> <%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
       </div>
+    </div>
+
+    <div class="card shadow mb-4">
+      <div class="card-header fw-bold">Order Items</div>
+      <div class="card-body p-0">
+        <table class="table table-bordered mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th>Product</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @order.order_items.each do |item| %>
+              <tr>
+                <td><%= item.product&.name %></td>
+                <td><%= number_to_currency(item.unit_price) %></td>
+                <td><%= item.quantity %></td>
+                <td><%= number_to_currency(item.subtotal) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card shadow mb-4">
+      <div class="card-header fw-bold">Invoice Summary</div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <span>Subtotal</span>
+          <span><%= number_to_currency(@order.subtotal) %></span>
+        </div>
+        <% if @order.gst_amount > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>GST (<%= @order.province&.gst %>%)</span>
+            <span><%= number_to_currency(@order.gst_amount) %></span>
+          </div>
+        <% end %>
+        <% if @order.pst_amount > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>PST (<%= @order.province&.pst %>%)</span>
+            <span><%= number_to_currency(@order.pst_amount) %></span>
+          </div>
+        <% end %>
+        <% if @order.hst_amount > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>HST (<%= @order.province&.hst %>%)</span>
+            <span><%= number_to_currency(@order.hst_amount) %></span>
+          </div>
+        <% end %>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <span>Total</span>
+          <span><%= number_to_currency(@order.total) %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <%= link_to "Edit Order", edit_admin_order_path(@order), class: "btn btn-warning" %>
     </div>
   </div>
 </div>
