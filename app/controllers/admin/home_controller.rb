@@ -8,5 +8,6 @@ class Admin::HomeController < ApplicationController
     @total_categories = Category.count
     @total_orders     = Order.count
     @recent_products  = Product.order(created_at: :desc).limit(5)
+    @recent_orders    = Order.order(created_at: :desc).limit(5)
   end
 end
