@@ -62,6 +62,12 @@
               <li class="nav-item me-2">
                 <%= link_to "My Account", edit_user_registration_path, class: "btn btn-outline-light btn-sm" %>
               </li>
+
+              <% if user_signed_in? && current_user.customer? %>
+              <li class="nav-item me-2">
+                <%= link_to "My Orders", customer_orders_path, class: "btn btn-outline-light btn-sm" %>
+              </li>
+            <% end %>
               <li class="nav-item">
                 <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm" %>
               </li>
