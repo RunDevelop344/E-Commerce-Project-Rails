@@ -37,56 +37,19 @@
     <% end %>
 
     <%# Address if unknown %>
-    <% if current_user.address.blank? %>
-      <div class="card mb-4">
-        <div class="card-header">Shipping Address</div>
-        <div class="card-body">
-          <div class="mb-2">
-            <%= f.text_field :street_address, placeholder: "Street Address", class: "form-control" %>
-          </div>
-          <div class="mb-2">
-            <%= f.text_field :city, placeholder: "City", class: "form-control" %>
-          </div>
-          <div class="mb-2">
-            <%= f.text_field :postal_code, placeholder: "Postal Code", class: "form-control" %>
-          </div>
-        </div>
-      </div>
+     <% if current_user.address.blank? %>
+     <%= render "checkouts/address_form", f: f %>
     <% end %>
 
     <%# Tax summary %>
-    <div class="card mb-4">
-      <div class="card-header fw-bold">Invoice Summary</div>
-      <div class="card-body">
-        <div class="d-flex justify-content-between">
-          <span>Subtotal</span>
-          <span>$<%= "%.2f" % @subtotal %></span>
-        </div>
-        <% if @gst > 0 %>
-          <div class="d-flex justify-content-between">
-            <span>GST (<%= @province&.gst %>%)</span>
-            <span>$<%= "%.2f" % @gst %></span>
-          </div>
-        <% end %>
-        <% if @pst > 0 %>
-          <div class="d-flex justify-content-between">
-            <span>PST (<%= @province&.pst %>%)</span>
-            <span>$<%= "%.2f" % @pst %></span>
-          </div>
-        <% end %>
-        <% if @hst > 0 %>
-          <div class="d-flex justify-content-between">
-            <span>HST (<%= @province&.hst %>%)</span>
-            <span>$<%= "%.2f" % @hst %></span>
-          </div>
-        <% end %>
-        <hr>
-        <div class="d-flex justify-content-between fw-bold fs-5">
-          <span>Total</span>
-          <span>$<%= "%.2f" % @total %></span>
-        </div>
-      </div>
-    </div>
+<%= render "checkouts/invoice_summary",
+    subtotal: @subtotal,
+    gst: @gst,
+    pst: @pst,
+    hst: @hst,
+    province: @province,
+    total: @total %>
+
 
     <div class="d-grid">
       <%= f.submit "Place Order", class: "btn btn-success btn-lg" %>

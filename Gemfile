@@ -10,7 +10,7 @@ gem "activeadmin"
 
 gem "kaminari"
 gem "bootstrap", "~> 5.3"
-gem "sassc-rails"
+gem "dartsass-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]

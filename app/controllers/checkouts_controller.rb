@@ -60,7 +60,7 @@ class CheckoutsController < ApplicationController
 
   def ensure_cart_not_empty
     if session[:cart].blank?
-      redirect_to products_path, alert: "Your cart is empty."
+      redirect_to root_path, alert: "Your cart is empty."
     end
   end
 

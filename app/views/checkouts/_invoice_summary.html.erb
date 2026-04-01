@@ -1,0 +1,32 @@
+<div class="card invoice-card mb-4">
+  <div class="card-header fw-bold">Invoice Summary</div>
+  <div class="card-body">
+    <div class="invoice-row">
+      <span>Subtotal</span>
+      <span>$<%= "%.2f" % subtotal %></span>
+    </div>
+    <% if gst > 0 %>
+      <div class="invoice-row">
+        <span>GST (<%= province&.gst %>%)</span>
+        <span>$<%= "%.2f" % gst %></span>
+      </div>
+    <% end %>
+    <% if pst > 0 %>
+      <div class="invoice-row">
+        <span>PST (<%= province&.pst %>%)</span>
+        <span>$<%= "%.2f" % pst %></span>
+      </div>
+    <% end %>
+    <% if hst > 0 %>
+      <div class="invoice-row">
+        <span>HST (<%= province&.hst %>%)</span>
+        <span>$<%= "%.2f" % hst %></span>
+      </div>
+    <% end %>
+    <hr>
+    <div class="invoice-total">
+      <span>Total</span>
+      <span>$<%= "%.2f" % total %></span>
+    </div>
+  </div>
+</div>

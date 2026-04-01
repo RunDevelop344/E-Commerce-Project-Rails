@@ -1,16 +1,168 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
-/* Global styles */
+// =====================
+// Variables
+// =====================
+$primary-color: #212529;
+$accent-color: #198754;
+$danger-color: #dc3545;
+$light-bg: #f8f9fa;
+$card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$font-stack: Arial, sans-serif;
+$spacing-unit: 1rem;
+$navbar-height: 56px;
 
+// =====================
+// Inheritance (placeholder selectors)
+// =====================
+%flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%card-base {
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  background-color: white;
+}
+
+// =====================
+// Base styles
+// =====================
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+  font-family: $font-stack;
+  background-color: $light-bg;
+  padding-top: $spacing-unit * 0.5;
+}
+
+// =====================
+// Navbar
+// =====================
+.navbar {
+  min-height: $navbar-height;
+
+  .navbar-brand {
+    font-size: $spacing-unit * 1.25;
+    letter-spacing: 0.5px;
+  }
+
+  .badge {
+    font-size: $spacing-unit * 0.6;
+  }
+}
+
+// =====================
+// Product Cards
+// =====================
+.product-card {
+  @extend %card-base;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-img-top {
+    border-radius: $border-radius $border-radius 0 0;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-footer {
+    @extend %flex-between;
+    background-color: $light-bg;
+    border-top: 1px solid #dee2e6;
+    padding: $spacing-unit * 0.75;
+  }
+
+  .price {
+    color: $accent-color;
+    font-weight: bold;
+    font-size: $spacing-unit * 1.2;
+  }
+}
+
+// =====================
+// Cart
+// =====================
+.cart-table {
+  th {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  .quantity-control {
+    width: 130px;
+
+    button {
+      border-color: #ced4da;
+    }
+  }
+
+  tfoot td {
+    font-weight: bold;
+    background-color: $light-bg;
+  }
+}
+
+// =====================
+// Checkout / Invoice
+// =====================
+.invoice-card {
+  @extend %card-base;
+  margin-bottom: $spacing-unit * 1.5;
+
+  .invoice-row {
+    @extend %flex-between;
+    padding: $spacing-unit * 0.25 0;
+  }
+
+  .invoice-total {
+    @extend %flex-between;
+    font-weight: bold;
+    font-size: $spacing-unit * 1.2;
+    padding-top: $spacing-unit * 0.5;
+    border-top: 2px solid #dee2e6;
+  }
+}
+
+// =====================
+// Flash messages
+// =====================
+.alert {
+  border-radius: $border-radius;
+  margin-bottom: $spacing-unit;
+}
+
+// =====================
+// Footer
+// =====================
+footer {
+  margin-top: $spacing-unit * 3;
+  padding: $spacing-unit * 1.5 0;
+
+  p {
+    font-size: $spacing-unit * 0.875;
+    color: #adb5bd;
+  }
+}
+
+// =====================
+// Forms (Devise)
+// =====================
+.devise-form {
+  max-width: 600px;
+  margin: $spacing-unit * 2 auto;
+
+  h2 {
+    margin-bottom: $spacing-unit * 1.5;
+    color: $primary-color;
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: $border-radius * 0.5;
+    margin-bottom: $spacing-unit * 0.5;
+  }
 }

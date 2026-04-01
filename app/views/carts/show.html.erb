@@ -17,35 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart_items.each do |item| %>
-          <tr>
-            <td><%= item[:product].name %></td>
-            <td>$<%= "%.2f" % item[:product].price %></td>
-            <td>
-              <%= form_with url: update_item_cart_path, method: :patch, local: true do |f| %>
-                <%= hidden_field_tag :product_id, item[:product].id %>
-                <div class="input-group" style="width: 130px;">
-                  <button type="submit" name="quantity" value="<%= [item[:quantity] - 1, 0].max %>"
-                          class="btn btn-outline-secondary btn-sm">−</button>
-                  <%= number_field_tag :quantity, item[:quantity],
-                      min: 1, class: "form-control form-control-sm text-center",
-                      onchange: "this.form.submit()" %>
-                  <button type="submit" name="quantity" value="<%= item[:quantity] + 1 %>"
-                          class="btn btn-outline-secondary btn-sm">+</button>
-                </div>
-              <% end %>
-            </td>
-            <td>$<%= "%.2f" % item[:subtotal] %></td>
-            <td>
-              <%= button_to "Remove", remove_item_cart_path,
-                  method: :delete,
-                  params: { product_id: item[:product].id },
-                  class: "btn btn-danger btn-sm",
-                  data: { turbo_confirm: "Remove this item?" } %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
+       <% @cart_items.each do |item| %>
+       <%= render "carts/cart_item", item: item %>
+           <% end %>
+       </tbody>
       <tfoot>
         <tr>
           <td colspan="3" class="text-end fw-bold">Total</td>
