@@ -179,3 +179,18 @@ puts "Done!"
 puts "Categories: #{Category.count}"
 puts "Products:   #{Product.count}"
 puts "Users:      #{User.count}"
+
+# -----------------------------------------------
+# Pages (About & Contact)
+# -----------------------------------------------
+puts "Creating pages..."
+Page.find_or_create_by!(slug: "about") do |p|
+  p.title   = "About Us"
+  p.content = "Welcome to Prairie Tech Store. We are a Canadian electronics retailer based in the prairies."
+end
+
+Page.find_or_create_by!(slug: "contact") do |p|
+  p.title   = "Contact Us"
+  p.content = "Email us at support@prairietech.com or call us at 1-800-PRAIRIE."
+end
+puts "Pages: #{Page.count}"

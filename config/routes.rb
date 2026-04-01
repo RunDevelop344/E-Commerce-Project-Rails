@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   get 'orders', to: 'orders#index', as: :customer_orders
 
+  # Public pages
+  get 'about',   to: 'pages#about',   as: :about
+  get 'contact', to: 'pages#contact', as: :contact
+
   # Cart (session-based)
   resource :cart, only: [:show] do
     post :add_item
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
     resources :products
     resources :categories
     resources :orders
+    resources :pages, only: [:index, :edit, :update]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
