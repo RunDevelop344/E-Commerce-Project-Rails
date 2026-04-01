@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root "home#index"
   resources :products, only: [:index, :show]
   resources :categories, only: [:index, :show]
+  get 'orders', to: 'orders#index', as: :customer_orders
 
   # Cart (session-based)
   resource :cart, only: [:show] do
