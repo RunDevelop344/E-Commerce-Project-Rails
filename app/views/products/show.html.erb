@@ -1,17 +1,14 @@
-<!-- app/views/products/show.html.erb -->
 <div class="row justify-content-center">
   <div class="col-md-8">
-
     <nav aria-label="breadcrumb" class="mb-3">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "Products", products_path %></li>
         <li class="breadcrumb-item active"><%= @product.name %></li>
       </ol>
     </nav>
 
     <div class="card shadow">
-
-      <!-- Product Image -->
       <% if @product.image.attached? %>
         <%= image_tag @product.image, class: "card-img-top", style: "max-height: 400px; object-fit: cover;" %>
       <% else %>
@@ -22,11 +19,9 @@
 
       <div class="card-body p-4">
         <h1 class="card-title fw-bold mb-1"><%= @product.name %></h1>
-
         <% if @product.category.present? %>
           <span class="badge bg-secondary mb-3"><%= @product.category.name %></span>
         <% end %>
-
         <hr>
         <p class="card-text fs-5"><%= @product.description %></p>
         <hr>
@@ -49,15 +44,23 @@
         </div>
 
         <div class="mt-4">
-        <%= form_with url: add_item_cart_path, method: :post, local: true do |f| %>
-        <%= hidden_field_tag :product_id, @product.id %>
-        <%= number_field_tag :quantity, 1, min: 1, class: "form-control d-inline w-auto" %>
-        <%= f.submit "Add to Cart", class: "btn btn-primary mt-2" %>
-        <% end %>
-          <%= link_to "← Back to Store", root_path, class: "btn btn-outline-dark" %>
+          <% if @product.stock_quantity > 0 %>
+            <%= form_with url: add_item_cart_path, method: :post, local: true do |f| %>
+              <%= hidden_field_tag :product_id, @product.id %>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <label class="form-label mb-0">Quantity:</label>
+                <%= number_field_tag :quantity, 1, min: 1,
+                    max: @product.stock_quantity,
+                    class: "form-control w-auto" %>
+                <%= f.submit "🛒 Add to Cart", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="alert alert-warning">This product is currently out of stock.</div>
+          <% end %>
+          <%= link_to "← Back to Products", products_path, class: "btn btn-outline-dark" %>
         </div>
       </div>
     </div>
-
   </div>
 </div>
