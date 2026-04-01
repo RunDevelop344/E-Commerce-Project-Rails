@@ -1,6 +1,7 @@
 # app/controllers/admin/orders_controller.rb
 class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_admin
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index

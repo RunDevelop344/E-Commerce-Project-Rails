@@ -1,6 +1,7 @@
 # app/controllers/admin/home_controller.rb
 class Admin::HomeController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_admin
 
   def index
     @total_products   = Product.count

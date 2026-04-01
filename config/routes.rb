@@ -1,22 +1,21 @@
 Rails.application.routes.draw do
-  # Devise (Authentication)
   devise_for :users
-
-  # Add this line - redirects /admin to /admin/dashboard
   get '/admin', to: redirect('/admin/dashboard')
 
-  # -----------------
-  # Public (Customer-facing)
-  # -----------------
   root "home#index"
-
   resources :products, only: [:index, :show]
-
   resources :categories, only: [:index, :show]
 
-  # -----------------
-  # Admin (Back-office)
-  # -----------------
+  # Cart (session-based)
+  resource :cart, only: [:show] do
+    post :add_item
+    patch :update_item
+    delete :remove_item
+  end
+
+  # Checkout
+  resource :checkout, only: [:show, :create]
+
   namespace :admin do
     get "dashboard", to: "home#index"
     resources :products
@@ -24,8 +23,5 @@ Rails.application.routes.draw do
     resources :orders
   end
 
-  # -----------------
-  # Health check
-  # -----------------
   get "up" => "rails/health#show", as: :rails_health_check
 end

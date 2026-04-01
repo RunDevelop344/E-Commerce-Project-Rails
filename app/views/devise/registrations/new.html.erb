@@ -1,29 +1,68 @@
-<h2>Sign up</h2>
+<div class="container mt-5" style="max-width: 600px;">
+  <h2 class="mb-4">Sign Up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :first_name, class: "form-label" %>
+        <%= f.text_field :first_name, class: "form-control", autocomplete: "given-name" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :last_name, class: "form-label" %>
+        <%= f.text_field :last_name, class: "form-control", autocomplete: "family-name" %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label" %>
+      <% if @minimum_password_length %>
+        <em class="text-muted"> (<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <hr class="my-4">
+    <h5 class="mb-3">Address Details</h5>
+
+    <div class="mb-3">
+      <%= f.label :address, "Street Address", class: "form-label" %>
+      <%= f.text_field :address, class: "form-control", autocomplete: "street-address" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :city, class: "form-label" %>
+      <%= f.text_field :city, class: "form-control", autocomplete: "address-level2" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :postal_code, class: "form-label" %>
+      <%= f.text_field :postal_code, class: "form-control", autocomplete: "postal-code" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :province_id, "Province", class: "form-label" %>
+      <%= f.collection_select :province_id, Province.all.order(:name), :id, :name,
+          { include_blank: "Select your province" }, { class: "form-select" } %>
+    </div>
+
+    <div class="d-grid mt-4">
+      <%= f.submit "Sign Up", class: "btn btn-primary btn-lg" %>
+    </div>
+  <% end %>
+
+  <div class="mt-3">
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <p><%= f.label :password %></p>
-    <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
-    <% end %>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
-  </div>
-
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
