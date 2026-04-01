@@ -1,0 +1,95 @@
+<div class="container py-4" style="max-width: 700px;">
+  <h2 class="mb-4">Checkout — Order Summary</h2>
+
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |item| %>
+        <tr>
+          <td><%= item[:product].name %></td>
+          <td><%= item[:quantity] %></td>
+          <td>$<%= "%.2f" % item[:product].price %></td>
+          <td>$<%= "%.2f" % item[:subtotal] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_with url: checkout_path, method: :post, local: true do |f| %>
+
+    <%# Province selection if user has no province %>
+    <% if current_user.province.nil? %>
+      <div class="mb-3">
+        <label class="form-label fw-bold">Select your province for tax calculation</label>
+        <%= select_tag :province_id, options_from_collection_for_select(Province.all.order(:name), :id, :name),
+            { include_blank: "Select Province", class: "form-select",
+              onchange: "this.form.submit()" } %>
+      </div>
+    <% else %>
+      <%= hidden_field_tag :province_id, current_user.province_id %>
+    <% end %>
+
+    <%# Address if unknown %>
+    <% if current_user.address.blank? %>
+      <div class="card mb-4">
+        <div class="card-header">Shipping Address</div>
+        <div class="card-body">
+          <div class="mb-2">
+            <%= f.text_field :street_address, placeholder: "Street Address", class: "form-control" %>
+          </div>
+          <div class="mb-2">
+            <%= f.text_field :city, placeholder: "City", class: "form-control" %>
+          </div>
+          <div class="mb-2">
+            <%= f.text_field :postal_code, placeholder: "Postal Code", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%# Tax summary %>
+    <div class="card mb-4">
+      <div class="card-header fw-bold">Invoice Summary</div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <span>Subtotal</span>
+          <span>$<%= "%.2f" % @subtotal %></span>
+        </div>
+        <% if @gst > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>GST (<%= @province&.gst %>%)</span>
+            <span>$<%= "%.2f" % @gst %></span>
+          </div>
+        <% end %>
+        <% if @pst > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>PST (<%= @province&.pst %>%)</span>
+            <span>$<%= "%.2f" % @pst %></span>
+          </div>
+        <% end %>
+        <% if @hst > 0 %>
+          <div class="d-flex justify-content-between">
+            <span>HST (<%= @province&.hst %>%)</span>
+            <span>$<%= "%.2f" % @hst %></span>
+          </div>
+        <% end %>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <span>Total</span>
+          <span>$<%= "%.2f" % @total %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid">
+      <%= f.submit "Place Order", class: "btn btn-success btn-lg" %>
+    </div>
+  <% end %>
+</div>

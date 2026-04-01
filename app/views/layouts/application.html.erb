@@ -42,6 +42,17 @@
           </ul>
 
           <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item me-2">
+            <% cart_count = session[:cart]&.values&.sum || 0 %>
+            <%= link_to cart_path, class: "btn btn-outline-light btn-sm position-relative" do %>
+            🛒 Cart
+            <% if cart_count > 0 %>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <%= cart_count %>
+              </span>
+            <% end %>
+           <% end %>
+          </li>
             <% if user_signed_in? %>
               <li class="nav-item me-2">
                 <span class="navbar-text text-light">

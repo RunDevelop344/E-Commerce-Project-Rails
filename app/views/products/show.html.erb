@@ -49,6 +49,11 @@
         </div>
 
         <div class="mt-4">
+        <%= form_with url: add_item_cart_path, method: :post, local: true do |f| %>
+        <%= hidden_field_tag :product_id, @product.id %>
+        <%= number_field_tag :quantity, 1, min: 1, class: "form-control d-inline w-auto" %>
+        <%= f.submit "Add to Cart", class: "btn btn-primary mt-2" %>
+        <% end %>
           <%= link_to "← Back to Store", root_path, class: "btn btn-outline-dark" %>
         </div>
       </div>
