@@ -5,8 +5,8 @@ require 'open-uri'
 
 puts "Cleaning old data..."
 Order.destroy_all
-Product.destroy_all
-Category.destroy_all
+#Product.destroy_all
+#Category.destroy_all
 
 puts "Seeding provinces..."
 Province.destroy_all
