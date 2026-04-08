@@ -24,11 +24,11 @@
     </div>
 
     <hr class="my-4">
-    <h5 class="mb-3">Address Details</h5>
+    <h3 class="mb-3">Address Details</h3>
 
     <div class="mb-3">
       <%= f.label :address, "Street Address", class: "form-label" %>
-      <%= f.text_field :address, class: "form-control", autocomplete: "street-address" %>
+      <%= f.text_field :address, class: "form-control" %>
     </div>
 
     <div class="mb-3">
@@ -48,7 +48,7 @@
     </div>
 
     <hr class="my-4">
-    <h5 class="mb-3">Change Password</h5>
+    <h3 class="mb-3">Change Password</h3>
 
     <div class="mb-3">
       <%= f.label :password, class: "form-label" %>
@@ -76,7 +76,7 @@
   <% end %>
 
   <hr class="my-4">
-  <h5 class="text-danger">Danger Zone</h5>
+  <h3 class="text-danger">Danger Zone</h3>
   <p class="text-muted">Once you cancel your account, there is no going back.</p>
   <%= button_to "Cancel My Account", registration_path(resource_name),
       data: { turbo_confirm: "Are you sure you want to delete your account?" },

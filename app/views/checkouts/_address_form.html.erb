@@ -1,14 +1,27 @@
 <div class="card mb-4">
   <div class="card-header">Shipping Address</div>
   <div class="card-body">
+
     <div class="mb-2">
-      <%= f.text_field :street_address, placeholder: "Street Address", class: "form-control" %>
+      <%= f.label :street_address, "Street Address", class: "form-label" %>
+      <%= f.text_field :street_address,
+            class: "form-control",
+            autocomplete: "address-line1" %>
     </div>
+
     <div class="mb-2">
-      <%= f.text_field :city, placeholder: "City", class: "form-control" %>
+      <%= f.label :city, "City", class: "form-label" %>
+      <%= f.text_field :city,
+            class: "form-control",
+            autocomplete: "address-level2" %>
     </div>
+
     <div class="mb-2">
-      <%= f.text_field :postal_code, placeholder: "Postal Code", class: "form-control" %>
+      <%= f.label :postal_code, "Postal Code", class: "form-label" %>
+      <%= f.text_field :postal_code,
+            class: "form-control",
+            autocomplete: "postal-code" %>
     </div>
+
   </div>
 </div>

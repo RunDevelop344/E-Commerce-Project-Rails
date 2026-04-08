@@ -34,7 +34,7 @@
 <%# Recent Orders %>
 <div class="card shadow mb-5">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">Recent Orders</h5>
+    <h3 class="mb-0">Recent Orders</h3>
     <%= link_to "View All", admin_orders_path, class: "btn btn-outline-dark btn-sm" %>
   </div>
   <div class="card-body p-0">
@@ -75,7 +75,7 @@
 <%# Recent Products %>
 <div class="card shadow">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">Recently Added Products</h5>
+    <h3 class="mb-0">Recently Added Products</h3>
     <%= link_to "View All", admin_products_path, class: "btn btn-outline-dark btn-sm" %>
   </div>
   <div class="card-body p-0">
@@ -94,7 +94,7 @@
           <tr>
             <td>
               <% if product.image.attached? %>
-                <%= image_tag product.image, width: 50, class: "rounded" %>
+                <%= image_tag product.image, alt: product.name, width: 50, class: "rounded" %>
               <% else %>
                 <span class="text-muted">No image</span>
               <% end %>

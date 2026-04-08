@@ -13,7 +13,7 @@
   <div class="col-md-6">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">Search Products</h5>
+        <h2 class="card-title">Search Products</h2>
         <%= form_with url: root_path, method: :get, local: true do |f| %>
           <div class="mb-2">
             <%= f.label :product_keyword, "Product Name or Description", class: "form-label" %>
@@ -37,7 +37,7 @@
 </div>
 
 <!-- Products Grid -->
-<h4 class="mb-3">All Products</h4>
+<h2 class="mb-3">All Products</h2>
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
   <% @products.each do |product| %>
     <%= render "products/product_card", product: product %>

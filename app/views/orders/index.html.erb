@@ -40,7 +40,7 @@
             <% if order.gst_amount > 0 %><p class="mb-1">GST: <%= number_to_currency(order.gst_amount) %></p><% end %>
             <% if order.pst_amount > 0 %><p class="mb-1">PST: <%= number_to_currency(order.pst_amount) %></p><% end %>
             <% if order.hst_amount > 0 %><p class="mb-1">HST: <%= number_to_currency(order.hst_amount) %></p><% end %>
-            <h5 class="fw-bold">Total: <%= number_to_currency(order.total) %></h5>
+            <h3 class="fw-bold">Total: <%= number_to_currency(order.total) %></h3>
           </div>
         </div>
       </div>
