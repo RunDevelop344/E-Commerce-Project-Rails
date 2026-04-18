@@ -2,7 +2,7 @@
 class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @orders = Order.all.order(created_at: :desc)
@@ -50,7 +50,3 @@ class Admin::OrdersController < ApplicationController
     params.require(:order).permit(:customer_id, :status, :total_price)
   end
 end
-
-
-
-

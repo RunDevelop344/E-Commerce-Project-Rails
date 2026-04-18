@@ -71,7 +71,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 
-  gem 'faker'
-  gem 'nokogiri'
-  gem 'httparty'
+  gem "faker"
+  gem "nokogiri"
+  gem "httparty"
 end

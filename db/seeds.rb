@@ -5,8 +5,8 @@ require 'open-uri'
 
 puts "Cleaning old data..."
 Order.destroy_all
-#Product.destroy_all
-#Category.destroy_all
+# Product.destroy_all
+# Category.destroy_all
 
 puts "Seeding provinces..."
 Province.destroy_all
@@ -22,7 +22,7 @@ provinces_data = [
   { name: "Nunavut",                       gst: 5.0, pst: 0.0,  hst: 0.0  },
   { name: "Ontario",                       gst: 0.0, pst: 0.0,  hst: 13.0 },
   { name: "Prince Edward Island",          gst: 0.0, pst: 0.0,  hst: 15.0 },
-  { name: "Quebec",                        gst: 5.0, pst: 9.975,hst: 0.0  },
+  { name: "Quebec",                        gst: 5.0, pst: 9.975, hst: 0.0  },
   { name: "Saskatchewan",                  gst: 5.0, pst: 6.0,  hst: 0.0  },
   { name: "Yukon",                         gst: 5.0, pst: 0.0,  hst: 0.0  }
 ]
@@ -47,7 +47,7 @@ category_map = {
 }
 
 categories = {}
-["Electronics", "Accessories", "Laptops", "Networking"].each do |name|
+[ "Electronics", "Accessories", "Laptops", "Networking" ].each do |name|
   categories[name] = Category.find_or_create_by!(name: name)
 end
 
@@ -70,7 +70,7 @@ end
 
 api_count = 0
 api_products.each do |item|
-  next unless ["electronics", "jewelery"].include?(item["category"])
+  next unless [ "electronics", "jewelery" ].include?(item["category"])
   category_name = category_map[item["category"]]
 
   product = Product.find_or_create_by!(name: item["title"]) do |p|
@@ -133,23 +133,23 @@ puts "Scraped #{scraped_count} products from web"
 puts "Generating electronics products with Faker..."
 
 electronics_products = [
-  { category: "Electronics", names: ["Smart TV", "Bluetooth Speaker", "Wireless Headphones",
+  { category: "Electronics", names: [ "Smart TV", "Bluetooth Speaker", "Wireless Headphones",
     "Gaming Console", "Digital Camera", "Smartwatch", "Tablet", "E-Reader",
     "Portable SSD", "USB-C Hub", "Webcam", "Mechanical Keyboard", "Gaming Mouse",
-    "Monitor Stand", "LED Desk Lamp", "Smart Bulb", "Power Bank", "Car Charger"] },
-  { category: "Laptops", names: ["Gaming Laptop", "Ultrabook", "2-in-1 Laptop",
+    "Monitor Stand", "LED Desk Lamp", "Smart Bulb", "Power Bank", "Car Charger" ] },
+  { category: "Laptops", names: [ "Gaming Laptop", "Ultrabook", "2-in-1 Laptop",
     "Chromebook", "Business Laptop", "Student Laptop", "Workstation Laptop",
-    "Budget Laptop", "MacBook Alternative", "Thin & Light Laptop"] },
-  { category: "Accessories", names: ["Phone Case", "Screen Protector", "Laptop Bag",
+    "Budget Laptop", "MacBook Alternative", "Thin & Light Laptop" ] },
+  { category: "Accessories", names: [ "Phone Case", "Screen Protector", "Laptop Bag",
     "Cable Organizer", "Wireless Charger", "Earbuds", "Phone Stand",
-    "Laptop Stand", "Mouse Pad", "Cable Clips"] },
-  { category: "Networking", names: ["WiFi Router", "Network Switch", "Ethernet Cable",
+    "Laptop Stand", "Mouse Pad", "Cable Clips" ] },
+  { category: "Networking", names: [ "WiFi Router", "Network Switch", "Ethernet Cable",
     "WiFi Extender", "Mesh Network System", "Powerline Adapter",
-    "Network Attached Storage", "Modem Router Combo", "WiFi 6 Router", "VPN Router"] }
+    "Network Attached Storage", "Modem Router Combo", "WiFi 6 Router", "VPN Router" ] }
 ]
 
 current_count = Product.count
-needed = [0, 100 - current_count].max
+needed = [ 0, 100 - current_count ].max
 
 needed.times do |i|
   group = electronics_products[i % electronics_products.length]

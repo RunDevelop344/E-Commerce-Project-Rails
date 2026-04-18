@@ -1,7 +1,7 @@
 class Admin::PagesController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin
-  before_action :set_page, only: [:edit, :update]
+  before_action :set_page, only: [ :edit, :update ]
 
   def index
     @pages = Page.all
