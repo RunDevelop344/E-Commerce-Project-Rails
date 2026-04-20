@@ -23,6 +23,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
+  config.active_storage.url_expires_in = 1.week
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true
@@ -58,8 +59,11 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
- config.action_controller.default_url_options = { host: "localhost", port: 3000 }
-routes.default_url_options[:host] = "localhost"
+
+ config.action_mailer.default_url_options = { host: "18.223.151.208", port: 3000 }
+
+  config.action_controller.default_url_options = { host: "18.223.151.208", port: 3000 }
+
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   # config.action_mailer.smtp_settings = {
