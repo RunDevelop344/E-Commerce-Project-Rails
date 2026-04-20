@@ -94,7 +94,7 @@
           <tr>
             <td>
               <% if product.image.attached? %>
-                <%= image_tag product.image, alt: product.name, width: 50, class: "rounded" %>
+                <%= image_tag product.image.blob.url, alt: product.name, width: 50, class: "rounded" %>
               <% else %>
                 <span class="text-muted">No image</span>
               <% end %>

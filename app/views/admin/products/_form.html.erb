@@ -41,7 +41,7 @@
     <%= f.label :image, class: "form-label" %>
     <% if product.image.attached? %>
       <div class="mb-2">
-        <%= image_tag product.image, width: 100, class: "rounded" %>
+        <%= image_tag product.image.blob.url, width: 100, class: "rounded" %>
       </div>
     <% end %>
     <%= f.file_field :image, class: "form-control" %>

@@ -12,3 +12,4 @@ amazon:
   secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] || Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: us-east-2
   bucket: prairie-tech-store-production2026
+  public: true

@@ -10,7 +10,7 @@
 
     <div class="card shadow">
       <% if @product.image.attached? %>
-        <%= image_tag @product.image, class: "card-img-top", style: "max-height: 400px; object-fit: cover;" %>
+        <%= image_tag @product.image.blob.url, class: "card-img-top", style: "max-height: 400px; object-fit: cover;" %>
       <% else %>
         <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
           <span class="text-muted fs-5">No Image Available</span>
